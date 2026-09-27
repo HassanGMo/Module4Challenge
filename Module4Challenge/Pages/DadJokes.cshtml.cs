@@ -38,16 +38,19 @@ public class DadJokesModel : PageModel
         GetRandomJokes();
     }
 
-    // THe method will pick 2 random jokes 
+    // THe method will pick 2 random jokes  
     public void GetRandomJokes()
     {
         Random random = new Random();
-
-        for (int i = 0; i < NumberOfJokes; i++)
+        // will make sure 2 of the same jokes aren't picked
+        int firstJoke = random.Next(0, DadJokes.Length);
+        int secondJoke = random.Next(0, DadJokes.Length);
+        
+        while (secondJoke == firstJoke)
         {
-            int randomNumber = random.Next(0, DadJokes.Length);
-
-            CurrentJokes[i] = DadJokes[randomNumber];
+            secondJoke = random.Next(0, DadJokes.Length);
         }
+        CurrentJokes[0] = DadJokes[firstJoke];
+        CurrentJokes[1] = DadJokes[secondJoke];
     }
 }
